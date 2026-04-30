@@ -121,7 +121,7 @@ nav ul a:hover{color:var(--cyan)}
 .dr-val{font-size:.82rem;color:var(--ink2)}
 
 .cta-row{display:flex;gap:.7rem;flex-wrap:wrap}
-.btn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:.55rem 1.15rem;border-radius:5px;text-decoration:none;transition:all .2s;display:inline-block;cursor:auto}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:.55rem 1.15rem;border-radius:5px;text-decoration:none;transition:all .2s;display:inline-block;cursor:pointer}
 .btn-primary{background:var(--pink);color:#0c0e13;font-weight:500;box-shadow:0 0 18px var(--pink-glow)}
 .btn-primary:hover{background:#ea6e97;box-shadow:0 0 30px rgba(224,92,138,.4)}
 .btn-ghost{border:1px solid var(--line);color:var(--ink3)}
@@ -265,6 +265,12 @@ nav ul a:hover{color:var(--cyan)}
 }
 </style>
 </head>
+  <script>
+function toggleContact() {
+  const box = document.getElementById("contactBox");
+  box.style.display = (box.style.display === "none") ? "block" : "none";
+}
+</script>
 <body>
 <div class="blob b1"></div>
 <div class="blob b2"></div>
@@ -314,9 +320,13 @@ nav ul a:hover{color:var(--cyan)}
       </div>
     </div>
     <div class="cta-row">
-      <a href="mailto:saranjasmine8@gmail.com" class="btn btn-primary">Contact</a>
+      <li><a href="#" onclick="toggleContact()">Contact</a></li>
      
     </div>
+    <div id="contactBox" style="display:none; margin-top:10px; color:#e8e8e8; font-size:0.85rem;">
+  <p>Email: saranjasmine8@gmail.com</p>
+  <p>Phone: (XXX) XXX-XXXX</p>
+</div>
   </div>
 
   <div class="right">
