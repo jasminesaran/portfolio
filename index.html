@@ -8,10 +8,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  :root{
-  --bg:#000000;        /* true dark */
---surface:#000000;   /* cards */
---surface2:#000000;  /* inner elements */
+:root{
+  --bg:#000000;        
+--surface:#000000;   
+--surface2:#000000;  
   --ink:#e8e8e8;
   --ink2:#8a8a8a;
   --ink3:#555555;
@@ -32,14 +32,13 @@ html,body{height:100%;overflow:hidden}
 
 body{
   background:var(--bg);
-  color:var(--ink);
+  color:#ede7ee;
   font-family:var(--sans);
   display:flex;
   flex-direction:column;
   cursor:auto;
 }
 
-/* grid noise overlay */
 body::after{
   content:'';
   position:fixed;inset:0;
@@ -48,15 +47,28 @@ body::after{
   pointer-events:none;z-index:999;
 }
 
+.project-body ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0 1rem 0;
+  font-size: 1rem;
+}
 
+.project-body li {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
 
-/* blobs */
+.project-body p {
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
 .blob{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
 .b1{width:480px;height:480px;background:rgba(224,92,138,.07);top:-120px;right:-80px}
 .b2{width:400px;height:400px;background:rgba(224,92,138,.04);bottom:-100px;left:-80px}
 .b3{display:none}
 
-/* nav */
 nav{
   position:relative;z-index:10;
   display:flex;align-items:center;justify-content:space-between;
@@ -71,16 +83,15 @@ nav ul{list-style:none;display:flex;gap:2rem}
 nav ul a{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);text-decoration:none;transition:color .2s}
 nav ul a:hover{color:var(--cyan)}
 
-/* main layout */
 .layout{flex:1;display:grid;grid-template-columns:370px 1fr;overflow:hidden;position:relative;z-index:1}
 
-/* left panel */
+
 .left{
   border-right:1px solid var(--line);
   padding:2.4rem 2rem;
   display:flex;flex-direction:column;gap:1.5rem;
   overflow-y:auto;
-  background:#000000;   /* solid dark */
+  background:#000000;   
 }
 
 .photo-wrap{
@@ -135,23 +146,73 @@ nav ul a:hover{color:var(--cyan)}
   position:relative;overflow:hidden;
   z-index:1;
 }
+
+.proj-img {
+  width: 100%;
+  max-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.proj-img img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  background: #000000;
+}
+
+.project-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.img-card {
+  text-align: center;
+}
+
+.img-card img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  object-fit: contain;
+  display: block;
+}
+
+.img-card p {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: #e8e8e8; 
+}
+
+.img-card.wide {
+  grid-column: span 2;
+}
+
+.img-card.wide img {
+  height: auto; 
+}
+
 .proj::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s}
 .proj:hover{transform:translateY(-3px)}
 .proj:hover::before{opacity:1}
 
-.proj.c1{border-top:2px solid var(--pink)}
+.proj.c1{border-top:2px solid #6e435c}
 .proj.c1::before{background:linear-gradient(135deg,rgba(224,92,138,.08) 0%,transparent 65%)}
 .proj.c1:hover{box-shadow:0 10px 36px rgba(224,92,138,.13)}
 
-.proj.c2{border-top:2px solid var(--pink)}
+.proj.c2{border-top:2px solid #6e435c}
 .proj.c2::before{background:linear-gradient(135deg,rgba(224,92,138,.07) 0%,transparent 65%)}
 .proj.c2:hover{box-shadow:0 10px 36px rgba(224,92,138,.12)}
 
-.proj.c3{border-top:2px solid #dcac28}
+.proj.c3{border-top:2px solid #6e435c}
 .proj.c3::before{background:linear-gradient(135deg,rgba(220,165,40,.07) 0%,transparent 65%)}
 .proj.c3:hover{box-shadow:0 10px 36px rgba(220,165,40,.1)}
 
-.proj.c4{border-top:2px solid #a868f5}
+.proj.c4{border-top:2px solid #6e435c}
 .proj.c4::before{background:linear-gradient(135deg,rgba(168,104,245,.07) 0%,transparent 65%)}
 .proj.c4:hover{box-shadow:0 10px 36px rgba(168,104,245,.1)}
 
@@ -174,7 +235,7 @@ nav ul a:hover{color:var(--cyan)}
   background:var(--surface);
   border:1px solid var(--line);
   border-radius:18px;
-  width:min(600px,90vw);max-height:80vh;overflow-y:auto;
+  width:65%;max-height:80vh;overflow-y:auto;
   padding:2.5rem;position:relative;
   transform:translateY(18px) scale(.97);transition:transform .3s;
   border-top:3px solid var(--pink);
@@ -184,10 +245,16 @@ nav ul a:hover{color:var(--cyan)}
 .modal-close:hover{border-color:var(--pink);color:var(--pink);box-shadow:0 0 12px var(--pink-glow)}
 .modal-num{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-bottom:.5rem;letter-spacing:.08em}
 .modal-title{font-family:var(--serif);font-size:1.9rem;color:var(--ink);margin-bottom:1rem;line-height:1.15}
-.modal-body{font-size:.88rem;color:var(--ink2);line-height:1.85;margin-bottom:1.25rem}
+.modal-body{font-size:1rem;color:#e8e8e8;line-height:1.85;margin-bottom:1.25rem}
 .modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
 .modal-tag{font-family:var(--mono);font-size:10px;padding:.28rem .65rem;border-radius:4px;border:1px solid var(--line);color:var(--ink3);background:var(--surface2)}
 .modal-accent{width:36px;height:2px;border-radius:2px;margin-bottom:1.25rem}
+
+.modal-body p strong {
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
 
 @media(max-width:768px){
   html,body{overflow:auto}
@@ -262,10 +329,13 @@ nav ul a:hover{color:var(--cyan)}
       <div class="proj c1" onclick="open_modal(0)">
         <span class="proj-arrow">↗</span>
         <div>
-          <p class="proj-num">001</p>
+          
           <h3 class="proj-name">Autonomous Robot</h3>
           <p class="proj-blurb">Real-time PID control on STM32. Multi-MCU system with WiFi, camera, and ToF sensing. Reduced oscillations by 30%.</p>
         </div>
+        <div class="proj-img">
+  <img src="carDiagram.png" alt="System Diagram">
+</div>
         <div class="proj-tags">
           <span class="ptag">STM32</span><span class="ptag">PID</span><span class="ptag">I²C</span><span class="ptag">ESP32</span>
         </div>
@@ -274,38 +344,48 @@ nav ul a:hover{color:var(--cyan)}
       <div class="proj c2" onclick="open_modal(1)">
         <span class="proj-arrow">↗</span>
         <div>
-          <p class="proj-num">002</p>
+          
           <h3 class="proj-name">Reflow Oven Controller</h3>
           <p class="proj-blurb">6-state FSM reflow controller on DE10-Lite. Thermocouple signal conditioning, PWM heater control, ±3°C accuracy.</p>
         </div>
+        <div class="proj-img">
+  <img src="reflow.png" alt="System Diagram">
+</div>
         <div class="proj-tags">
           <span class="ptag">8051 ASM</span><span class="ptag">Op-Amp</span><span class="ptag">PWM</span><span class="ptag">Python</span>
-        </div>
-      </div>
-
-      <div class="proj c3" onclick="open_modal(2)">
-        <span class="proj-arrow">↗</span>
-        <div>
-          <p class="proj-num">003</p>
-          <h3 class="proj-name">RISC-V CPU on FPGA</h3>
-          <p class="proj-blurb">32-bit single-cycle RISC-V processor in SystemVerilog on Intel MAX10. Full datapath, ALU, control logic, QuestaSim verified.</p>
-        </div>
-        <div class="proj-tags">
-          <span class="ptag">SystemVerilog</span><span class="ptag">RISC-V</span><span class="ptag">Quartus</span>
         </div>
       </div>
 
       <div class="proj c4" onclick="open_modal(3)">
         <span class="proj-arrow">↗</span>
         <div>
-          <p class="proj-num">004</p>
+          
           <h3 class="proj-name">LED Driver PCB</h3>
-          <p class="proj-blurb">Custom 2-layer PCB for UBC Thunderbikes electric race bike. 24V buck regulator, N-MOSFET driver stages, LTspice verified.</p>
+          <p class="proj-blurb">Custom 2-layer PCB for UBC Thunderbikes electric race bike. 24V buck regulator, MOSFET driver stages,              LTspice verified.</p>
         </div>
+
+        <div class="proj-img">
+  <img src="Untitled (3).png" alt="System Diagram">
+</div>
         <div class="proj-tags">
           <span class="ptag">Altium</span><span class="ptag">Buck Conv.</span><span class="ptag">MOSFET</span><span class="ptag">LTspice</span>
         </div>
       </div>
+
+      <div class="proj c3" onclick="open_modal(2)">
+        <span class="proj-arrow">↗</span>
+        <div>
+          
+          <h3 class="proj-name">FPGA Tron Game</h3>
+<p class="proj-blurb">Real-time Tron-style light cycle game in C on DE10-Lite FPGA, using memory-mapped VGA rendering, hardware switch input, and ISR-based timing.</p>        </div>
+        <div class="proj-img">
+  <img src="fpga3.png" alt="System Diagram">
+</div>
+        <div class="proj-tags">
+          <span class="ptag">SystemVerilog</span><span class="ptag">RISC-V</span><span class="ptag">Quartus</span>
+        </div>
+      </div>
+
 
     </div>
   </div>
@@ -326,27 +406,161 @@ nav ul a:hover{color:var(--cyan)}
 <script>
 const projects = [
   {
-    num:'001', title:'Autonomous Robot',
+    title:'Autonomous Robot',
     color:'#e05c8a',
-    body:`Built a real-time closed-loop control system on STM32 using ADC-based L–R IR feedback to implement PID-based differential steering. Signal conditioning (averaging, calibration, deadband) reduced oscillations by 30% and improved tracking accuracy.\n\nDesigned a multi-MCU system (STM32 + EFM8 + ESP32) with WiFi/Bluetooth connectivity, camera streaming, and I²C ToF sensing. Implemented hybrid manual/autonomous FSM navigation with real-time obstacle avoidance and remote monitoring via UART telemetry at 115200 baud.`,
+    body: `
+<p><strong>Autonomous Field-Following Robot (STM32 + ESP32 + EFM8)</strong></p>
+
+<p>This project is a multi-controller robot system built around three MCUs: an EFM8-based IR remote, an STM32 controlling the robot, and an ESP32 handling WiFi, camera streaming, and phone control.</p>
+
+<p>The robot supports three driving modes:</p>
+<ul>
+  <li>IR remote control for manual driving</li>
+  <li>Autonomous wire-following using inductive sensors</li>
+  <li>Phone-based control through a custom web interface</li>
+</ul>
+
+<p><strong>Control & Navigation</strong></p>
+
+<p>For autonomous movement, the robot follows an inductive wire using three sensors (left, right, back). A PID-based steering controller continuously compares the left and right signals and adjusts motor speeds to stay centered on the wire. A small deadband helps prevent jitter when the robot is already aligned.</p>
+
+<p>Intersections are handled using a dedicated navigation state machine. Instead of relying on a fixed threshold, the robot detects intersections using a rising-edge change in signal, which made detection much more reliable in noisy conditions.</p>
+
+<p><strong>Firmware & Communication</strong></p>
+
+<p>All robot control runs on the STM32 using embedded C. I handled:</p>
+<ul>
+  <li>Motor control with PWM through an H-bridge</li>
+  <li>Sensor processing using 12-bit ADC with averaging and calibration</li>
+  <li>Obstacle detection via a ToF sensor over I²C</li>
+  <li>IR communication using interrupt-driven decoding</li>
+</ul>
+
+<p>One of the most important parts of the project was designing a custom IR protocol. Since multiple teams were operating robots using the same 38 kHz IR frequency, interference became a major issue.</p>
+
+<p>To solve this, I built a 4-state decoding system (IDLE → CMD → CHECKSUM → STOP) with checksum validation, timing windows, and a watchdog timeout. Instead of relying on hardware filtering alone, this added a layer of protocol-level noise rejection, which significantly improved reliability in a crowded environment.</p>
+
+<p><strong>Key Challenges & Takeaways</strong></p>
+
+<p>One of the hardest issues I ran into was the VL53L0X ToF sensor failing after integration. Because I had already validated it independently, I knew right away the issue wasn’t hardware, it turned out to be a timing conflict on the I²C bus. That experience reinforced how important isolating subsystems before integration really is.</p>
+
+<p>Another big takeaway was around noise and communication reliability. When multiple systems share the same medium, filtering at the hardware level isn’t enough. Adding checksums, timing constraints, and watchdog resets made the system far more reliable than any physical filtering alone.</p>
+
+<p><strong>Results</strong></p>
+<ul>
+  <li>Successfully followed wire paths and completed multiple programmed routes</li>
+<li>Reduced steering oscillations (~30%) through tuning and  control, improving tracking stability</li>  
+<li>Real-time phone control with responsive feedback over WiFi</li>
+</ul>
+
+<p><strong>Media</strong></p>
+
+<div class="project-images">
+  <div class="img-card">
+    <img src="hbridge.png" alt="Robot">
+    <p>H-Bridge Configuration</p>
+  </div>
+
+  <div class="img-card">
+    <img src="Untitled design2.png" alt="Web app">
+    <p>Overall System</p>
+  </div>
+</div> `,
     tags:['STM32','C','PID Control','I²C','ESP32','WiFi','UART','FSM','March 2026']
   },
   {
-    num:'002', title:'Reflow Oven Controller',
-    color:'#1fe0c5',
-    body:`Microcontroller-based reflow soldering controller for ELEC291 on the DE10-Lite (8051 architecture). Implements a 6-state FSM (Idle → Ramp → Soak → Ramp → Reflow → Cooling) with hysteresis-based PWM heater control via SSR/MOSFET.\n\nK-type thermocouple signal conditioning with LMC7660 negative rail, op-amp gain of 300×, and cold-junction compensation via LM335. Temperature accuracy within ±3°C across 25–240°C. User interface includes LCD, 7-segment display, 4×4 keypad, LED indicators, buzzer jingles, servo motor, and Python serial plotting with email notifications.`,
+    title:'Reflow Oven Controller',
+    color:'#e05c8a',
+    body:`
+    <p><strong>Reflow Oven Controller (8051 Assembly)</strong></p>
+    <p>This project is real-time reflow oven controller built on an 8052-based system and implemented entirely in assembly. It runs a full multi-stage reflow profile by reading temperature from a K-type thermocouple and regulating heater power through PWM-driven SSR control, with both hardware (keypad + LCD) and UART-based interfaces for user interaction.</p>
+<p><strong>Control & Architecture</strong></p>
+<p>As the system grew, a simple polling loop introduced latency and blocking. I redesigned the firmware into a publish–subscribe architecture using bit-level signals, allowing modules to communicate through events rather than direct calls. This made the system deterministic, modular, and scalable, with each subsystem (FSM control, sensing, PWM, UI, safety) operating independently and reacting to timing and temperature events.</p>
+<p><strong>Firmware Design</strong></p>
+<p>All firmware was written in assembly, including:</p>
+<ul>
+  <li>Multi-stage reflow FSM (idle → ramp → soak → reflow → cooling)</li>
+  <li>Software PWM for heater control through an SSR</li>
+  <li> Temperature processing using thermocouple amplification and calibration </li>
+  <li> Dual user interfaces: keypad + LCD, and UART-based Python GUI </li>
+  <li> Safety logic including automatic abort conditions and error signaling </li>
+  </ul>
+  <p><strong>Key Challenges and Takeaways</strong></p>
+  <p> One of the biggest challenges was scalability. As more features were added, the original sequential loop introduced timing issues and became difficult to manage. I refactored the system into independent modules that communicate through shared signals, resulting in easier debugging. </p>
+  <p> Another key takeaway was around safety. Because the system controls a high-power oven, handling failure cases was critical. Implementing automatic abort conditions and independent safety checks ensured the system behaved predictably even under fault conditions.</p>
+  <p><strong>Results</strong></p>
+<ul>
+  <li>Achieved ±3 °C temperature accuracy using thermocouple sensing</li>
+<li>Successfully executed full multi-stage reflow profiles in real time</li>  
+<li>Eliminated blocking behavior through a modular publish–subscribe architecture</li>
+<li> Built a deterministic control system entirely in assembly </li>
+</ul>
+<p><strong>Media</strong></p>
+
+<div class="project-images">
+  <div class="img-card">
+    <img src="fsm.png" alt="Robot">
+    <p>Finite State Machine for the Oven Controller</p>
+  </div>
+
+  <div class="img-card">
+    <img src="4.Plotted Graph.png" alt="Web app">
+    <p>Plot of Temperature Profile</p>
+  </div>
+</div>
+`,
     tags:['8051 Assembly','DE10-Lite','Op-Amp','PWM','LTspice','Python','FSM','Feb 2026']
   },
   {
-    num:'003', title:'RISC-V CPU on FPGA',
-    color:'#dcac28',
-    body:`Implemented a 32-bit single-cycle RISC-V CPU in SystemVerilog on an Intel MAX10 FPGA (DE10-Lite) using Quartus Prime. Developed the complete datapath, register file, and ALU supporting arithmetic, logical, and memory instructions.\n\nDesigned and verified control logic and FSMs to coordinate instruction execution. Built comprehensive testbenches in QuestaSim to simulate, debug, and validate processor functionality and memory interfaces. Separately built a Tron-style game in C on a Nios V soft-core CPU with memory-mapped VGA framebuffer graphics and interrupt-driven game loop.`,
-    tags:['SystemVerilog','RISC-V','Intel MAX10','Quartus Prime','QuestaSim','Nios V','VGA','Winter 2025']
+    title:'RISC-V CPU on FPGA',
+    color:'#e05c8a',
+body:`<p><strong> Tron Style Light Cycle Game (DE10-Lite FPGA)</strong></p>
+<p>This project involved building a real-time Tron-style light cycle game in C on the DE10-Lite FPGA. The game renders directly to a VGA display using a memory-mapped pixel buffer, where players move continuously and leave trails that act as obstacles. Input is read from hardware switches, and collision detection is handled by checking pixel values on the screen.</p>
+<p><strong> Interrupts and Control </strong></p>
+<p>The system uses multiple ISRs (Interrupt Service Routines) to handle different parts of the game. A timer ISR controls the game speed and ensures consistent movement updates, while a key ISR captures player input without blocking the main loop. Separating these responsibilities allowed the game to remain responsive while maintaining smooth, predictable timing. </p>
+<p><strong> Reflection </strong></p>
+<p>This project gave me a much better understanding of low-level system design. Without any graphics libraries, everything from rendering to collision detection had to be handled manually. It also reinforced how important proper use of interrupts is for building responsive, real-time systems. </p>
+
+`, 
+tags:['SystemVerilog','RISC-V','Intel MAX10','Quartus Prime','QuestaSim','Nios V','VGA','Winter 2025']
   },
   {
-    num:'004', title:'LED Driver PCB — Thunderbikes',
-    color:'#a868f5',
-    body:`Designed and fabricated a custom 2-layer PCB in Altium Designer for high-current LED safety indicators on UBC Thunderbikes' electric race bike, built for the international MotoStudent Electric competition.\n\nIntegrated a 24V SY8303 buck regulator with feedback and decoupling networks to generate stable 5V/3.3V supply rails. Implemented N-MOSFET driver stages (AO3400A) to switch high-current LED channels, separating power paths from control signals to reduce switching noise. Selected components from datasheets to meet MotoStudent specs: ≥1W LED output, 1Hz signaling, 5m visibility. Verified with LTspice transient analysis.`,
+    title:'LED Cluster PCB — Thunderbikes',
+    color:'#e05c8a',
+body:`
+    <p><strong> LED Safety Indicator PCB (UBC Thunderbikes) </strong></p>
+<p>This project involved designing a custom PCB in Altium Designer for the LED safety indicator system on UBC Thunderbikes’ electric race bike. The board has been sent for manufacturing, and I’m currently awaiting testing and debugging. </p>
+<p><strong> Problem</strong></p>
+<p>The main challenge was translating multiple system signals into a single, clear visual output while meeting strict safety requirements. The system needed to clearly indicate the bike’s state (Safe, Engaged, Not Safe, Charging) under strict competition rules, including ≥1 W LED output, 1 Hz blinking behavior, and visibility from 5 meters, while ensuring only one state is active at a time.  </p>
+ <p><strong>Design Approach</strong></p>
+<ul>
+  <li>Implemented a buck converter to step the bike’s 24 V supply down to a stable 3.3 V logic rail</li>
+<li>Used MOSFET switching stages to control high-power LED channels for each state</li>  
+<li>Integrated a 555 timer to generate the 1 Hz blinking signal for the “Safe” state</li>
+<li> Structured the logic so only one LED path can be active at a time</li>
+<li> Separated power and control routing to reduce switching noise and improve stability </li>
+</ul>  
+<p>Component selection and layout were driven by current requirements and visibility constraints, ensuring the LEDs met brightness requirements without introducing instability in the control signals. </p>
+ <p><strong>Reflection </strong></p>
+<p> One of the biggest takeaways was learning to design around real-world constraints rather than ideal behavior. Early on, I approached the system as a simple logic problem, just mapping inputs to LED outputs, but as the design evolved, I realized how many edge cases had to be handled correctly. Signal conflicts, power instability, and failure modes all had to be considered to avoid misleading outputs.
+Integrating the 24 V power system, regulating it down for logic, and ensuring clean switching for high-current LEDs forced me to think more carefully about power integrity, noise, and separation between control and power paths. </p>
+<div class="project-images">
+  <div class="img-card">
+    <img src="Screenshot 2026-04-29 204513.png">
+    <p>Top View</p>
+  </div>
+
+  <div class="img-card">
+    <img src="Screenshot 2026-04-29 162746.png">
+    <p>3D Model</p>
+  </div>
+
+  <div class="img-card wide">
+    <img src="Screenshot 2026-04-29 205256.png">
+    <p>Schematic Capture</p>
+  </div>
+</div>
+`,     
     tags:['Altium Designer','Buck Converter','MOSFET','LTspice','PCB','Power Electronics','Jan 2026']
   }
 ];
@@ -359,7 +573,7 @@ function open_modal(i) {
   document.getElementById('m-num').textContent = p.num;
   document.getElementById('m-title').textContent = p.title;
   document.getElementById('m-accent').style.background = p.color;
-  document.getElementById('m-body').innerHTML = p.body.replace(/\n\n/g,'</p><p style="margin-top:.85rem">');
+document.getElementById('m-body').innerHTML = p.body;
   document.getElementById('m-tags').innerHTML = p.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
   modal.style.borderTopColor = p.color;
   overlay.classList.add('show');
