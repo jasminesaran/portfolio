@@ -526,11 +526,13 @@ const projects = [
     title:'Tron Engine Game',
     color:'#e05c8a',
 body:`<p><strong> Tron Style Light Cycle Game (DE10-Lite FPGA)</strong></p>
-<p>This project involved building a real-time Tron-style light cycle game in C on the DE10-Lite FPGA. The game renders directly to a VGA display using a memory-mapped pixel buffer, where players move continuously and leave trails that act as obstacles. Input is read from hardware switches, and collision detection is handled by checking pixel values on the screen.</p>
+<p>This project involved building a real-time Tron-style light cycle game in C on the DE10-Lite FPGA. The game renders directly to a VGA display using a memory-mapped pixel buffer, where players move continuously and leave trails that act as obstacles. Collision detection is handled by reading pixel values directly from the screen. The game tracks scores up to 9 wins, handles head-on collisions as a separate edge case, and lets you adjust game speed in real-time using hardware switches.
+</p>
+<p><strong> The bot uses reactive pathfinding, it looks ahead at its next position, and if it detects a collision, it tries turning left first, then right. Simple but effective, and it makes for a challenging opponent.</p></strong>
 <p><strong> Interrupts and Control </strong></p>
 <p>The system uses multiple ISRs (Interrupt Service Routines) to handle different parts of the game. A timer ISR controls the game speed and ensures consistent movement updates, while a key ISR captures player input without blocking the main loop. Separating these responsibilities allowed the game to remain responsive while maintaining smooth, predictable timing. </p>
 <p><strong> Reflection </strong></p>
-<p>This project gave me a much better understanding of low-level system design. Without any graphics libraries, everything from rendering to collision detection had to be handled manually. It also reinforced how important proper use of interrupts is for building responsive, real-time systems. </p>
+<p>Without any graphics libraries, everything from rendering to collision detection had to be handled manually. It reinforced how important interrupts are for building responsive real-time systems, and made me think more carefully about how to use every CPU cycle rather than letting the processor sit idle. </p>
 
 `, 
 tags:['SystemVerilog','RISC-V','Intel MAX10','Quartus Prime','QuestaSim','Nios V','VGA']
