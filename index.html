@@ -528,7 +528,8 @@ const projects = [
 body:`<p><strong> Tron Style Light Cycle Game (DE10-Lite FPGA)</strong></p>
 <p>This project involved building a real-time Tron-style light cycle game in C on the DE10-Lite FPGA. The game renders directly to a VGA display using a memory-mapped pixel buffer, where players move continuously and leave trails that act as obstacles. Collision detection is handled by reading pixel values directly from the screen. The game tracks scores up to 9 wins, handles head-on collisions as a separate edge case, and lets you adjust game speed in real-time using hardware switches.
 </p>
-<p><strong> The bot uses reactive pathfinding, it looks ahead at its next position, and if it detects a collision, it tries turning left first, then right. Simple but effective, and it makes for a challenging opponent.</p></strong>
+<p><strong> AI Opponent </p></strong>
+<p> The bot uses reactive pathfinding, it looks ahead at its next position, and if it detects a collision, it tries turning left first, then right. Simple but effective, and it makes for a challenging opponent.</p>
 <p><strong> Interrupts and Control </strong></p>
 <p>The system uses multiple ISRs (Interrupt Service Routines) to handle different parts of the game. A timer ISR controls the game speed and ensures consistent movement updates, while a key ISR captures player input without blocking the main loop. Separating these responsibilities allowed the game to remain responsive while maintaining smooth, predictable timing. </p>
 <p><strong> Reflection </strong></p>
