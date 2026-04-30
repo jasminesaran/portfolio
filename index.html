@@ -475,7 +475,8 @@ const projects = [
     <p><strong>Reflow Oven Controller (8051 Assembly)</strong></p>
     <p>This project is real-time reflow oven controller built on an 8052-based system and implemented entirely in assembly. It runs a full multi-stage reflow profile by reading temperature from a K-type thermocouple and regulating heater power through PWM-driven SSR control, with both hardware (keypad + LCD) and UART-based interfaces for user interaction.</p>
 <p><strong>Control & Architecture</strong></p>
-<p>As the system grew, a simple polling loop introduced latency and blocking. I redesigned the firmware into a publish–subscribe architecture using bit-level signals, allowing modules to communicate through events rather than direct calls. This made the system deterministic, modular, and scalable, with each subsystem (FSM control, sensing, PWM, UI, safety) operating independently and reacting to timing and temperature events.</p>
+<p> As system complexity increased, a polling-based implementation introduced timing inconsistencies. I redesigned the firmware to use an interrupt-driven architecture, leveraging hardware timer ISRs for precise timing and decoupling time-critical operations from the main control loop.</p>
+<p> A finite state machine governs the reflow process, while interrupts handle periodic updates for sensing, PWM control, and event timing. This hybrid design reduced blocking behavior and improved determinism, resulting in stable real-time control across all stages of the reflow cycle. </p>
 <p><strong>Firmware Design</strong></p>
 <p>All firmware was written in assembly, including:</p>
 <ul>
