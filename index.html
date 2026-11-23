@@ -124,6 +124,9 @@ nav ul a:hover{color:var(--pink)}
 .proj-blurb{font-size:.82rem;color:var(--ink2);line-height:1.65}
 .proj-img{aspect-ratio:16/10;border-radius:8px;background:#030303;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:.5rem}
 .proj-img img{max-width:100%;max-height:100%;object-fit:contain}
+.proj-img.placeholder{flex-direction:column;gap:.4rem;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);background:repeating-linear-gradient(135deg,#050505 0 10px,#080808 10px 20px)}
+.proj-img.placeholder strong{font-family:var(--serif);font-weight:400;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--ink2)}
+.proj-status{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#dcac28;border:1px solid rgba(220,172,40,.3);background:rgba(220,172,40,.07);border-radius:3px;padding:.1rem .4rem;margin-left:.5rem;vertical-align:1px}
 .proj-foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
 .proj-tags{display:flex;flex-wrap:wrap;gap:.3rem}
 .ptag{font-family:var(--mono);font-size:9px;letter-spacing:.06em;padding:.18rem .48rem;border-radius:3px;color:#d8d8d8;background:var(--surface2);border:1px solid var(--line)}
@@ -226,6 +229,7 @@ nav ul a:hover{color:var(--pink)}
       </div>
       <div class="dr">
         <span class="dr-label">Currently</span>
+        <span class="dr-val">Hardware Engineering Co-op · Kardium</span>
         <span class="dr-val">Hardware Design Engineer · UBC Thunderbikes</span>
       </div>
       <div class="dr">
@@ -298,6 +302,35 @@ const projects = [
   <div class="img-card"><a href="Screenshot 2026-04-29 162746.png" target="_blank"><img src="Screenshot 2026-04-29 162746.png" alt="PCB 3D model" loading="lazy"></a><p>3D Model</p></div>
   <div class="img-card wide"><a href="Screenshot 2026-04-29 205256.png" target="_blank"><img src="Screenshot 2026-04-29 205256.png" alt="Schematic" loading="lazy"></a><p>Schematic Capture</p></div>
 </div>`
+  },
+  {
+    title: 'Vehicle Control Unit (VCU)',
+    context: 'UBC Thunderbikes', team: true, status: 'In progress',
+    blurb: 'Redesign of the VCU for the Thunderbikes electric race bike. I own the MCU schematic sheet and the safety-loop relay drive, moving the shutdown circuit to mechanical relays.',
+    img: null, imgAlt: 'VCU schematic',
+    cardTags: ['Altium','STM32','Safety Loop','12V'],
+    tags: ['Altium Designer','STM32','Schematic Capture','Safety Loop','Relays','Buck Converter','Optocouplers'],
+    body: `
+<h4>VCU Redesign (UBC Thunderbikes, VCU27)</h4>
+<p>The vehicle control unit is the bike's central controller: it coordinates the safety loop (shutdown circuit), precharge, and the other boards on the bike. The team is redesigning it from the ground up, and I'm responsible for the MCU schematic sheet and the BMS_OK relay drive in the safety loop.</p>
+
+<h4>Safety Loop: Moving to Mechanical Relays</h4>
+<p>The previous design switched the shutdown circuit with optocoupler and MOSFET combinations. Competition rules require the high-voltage disconnect to use a normally-open mechanical contactor, so the loop is being rebuilt as a series chain of relay contacts (interlock, IMD, BMS and MCU stages) running at 12 V.</p>
+<ul>
+  <li>Each relay coil is driven by a low-side N-channel MOSFET from its logic signal</li>
+  <li>Phototransistor optocouplers isolate signals where the BMS and VCU grounds can't be guaranteed to be shared</li>
+  <li>DPDT relays use their spare pole so the VCU can read back the actual state of each stage</li>
+</ul>
+
+<h4>MCU &amp; Power</h4>
+<ul>
+  <li>MCU clocked at 520 MHz instead of the 550 MHz boost mode so TCM ECC stays enabled, since the team plans to rely on TCM more in future revisions</li>
+  <li>12 V input stepped down with a buck converter to 5 V, then an LDO to 3.3 V</li>
+  <li>Input protection with reverse-polarity protection, a TVS sized for the 12 V rail, and a fuse</li>
+</ul>
+
+<h4>Status</h4>
+<p>Schematic capture is in progress. Layout, bring-up and test results will be added here as the board comes together.</p>`
   },
   {
     title: 'Autonomous Robot',
@@ -418,11 +451,13 @@ const grid = document.getElementById('project-grid');
 grid.innerHTML = projects.map((p, i) => `
   <button class="proj" data-i="${i}" aria-haspopup="dialog">
     <div>
-      <span class="proj-ctx${p.team ? ' team' : ''}">${p.context}</span>
+      <span class="proj-ctx${p.team ? ' team' : ''}">${p.context}</span>${p.status ? `<span class="proj-status">${p.status}</span>` : ''}
       <h3 class="proj-name">${p.title}</h3>
       <p class="proj-blurb">${p.blurb}</p>
     </div>
-    <div class="proj-img"><img src="${p.img}" alt="${p.imgAlt}" loading="lazy"></div>
+    ${p.img
+      ? `<div class="proj-img"><img src="${p.img}" alt="${p.imgAlt}" loading="lazy"></div>`
+      : `<div class="proj-img placeholder"><strong>${p.title}</strong>Images coming soon</div>`}
     <div class="proj-foot">
       <div class="proj-tags">${p.cardTags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
       <span class="proj-more">Details →</span>
