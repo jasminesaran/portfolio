@@ -80,7 +80,7 @@ nav ul a:hover{color:var(--pink)}
 
 .hero-tag{font-family:var(--mono);font-size:11px;color:var(--pink);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.4rem}
 .hero-name{font-family:var(--serif);font-weight:400;font-size:2.5rem;line-height:1.05;letter-spacing:-.02em}
-.hero-bio{font-size:.9rem;color:var(--ink2);line-height:1.75}
+.hero-bio{font-size:.9rem;color:var(--ink2);line-height:1.75;display:flex;flex-direction:column;gap:.7rem}
 
 .chips{display:flex;flex-wrap:wrap;gap:.4rem}
 .chip{font-family:var(--mono);font-size:10px;padding:.22rem .6rem;border-radius:4px;letter-spacing:.06em;border:1px solid rgba(224,92,138,.25);color:#d77fb3;background:rgba(224,92,138,.06)}
@@ -118,20 +118,27 @@ nav ul a:hover{color:var(--pink)}
 .proj:hover::before,.proj:focus-visible::before{opacity:1}
 .proj:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
 
-.proj-ctx{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
-.proj-ctx.team{color:var(--pink)}
 .proj-name{font-family:var(--serif);font-weight:400;font-size:1.2rem;line-height:1.2;margin:.3rem 0 .45rem}
 .proj-blurb{font-size:.82rem;color:var(--ink2);line-height:1.65}
 .proj-img{aspect-ratio:16/10;border-radius:8px;background:#030303;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:.5rem}
 .proj-img img{max-width:100%;max-height:100%;object-fit:contain}
 .proj-img.placeholder{flex-direction:column;gap:.4rem;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);background:repeating-linear-gradient(135deg,#050505 0 10px,#080808 10px 20px)}
 .proj-img.placeholder strong{font-family:var(--serif);font-weight:400;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--ink2)}
-.proj-status{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#dcac28;border:1px solid rgba(220,172,40,.3);background:rgba(220,172,40,.07);border-radius:3px;padding:.1rem .4rem;margin-left:.5rem;vertical-align:1px}
+.proj-status{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#dcac28;border:1px solid rgba(220,172,40,.3);background:rgba(220,172,40,.07);border-radius:3px;padding:.1rem .4rem;display:inline-block;margin-left:.4rem;vertical-align:4px;font-family:var(--mono)}
 .proj-foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
 .proj-tags{display:flex;flex-wrap:wrap;gap:.3rem}
 .ptag{font-family:var(--mono);font-size:9px;letter-spacing:.06em;padding:.18rem .48rem;border-radius:3px;color:#d8d8d8;background:var(--surface2);border:1px solid var(--line)}
 .proj-more{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);transition:color .2s}
 .proj:hover .proj-more,.proj:focus-visible .proj-more{color:var(--pink)}
+
+/* hobbies */
+.hobbies{margin-top:2.5rem}
+.hobby-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.hobby{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.hobby img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-bottom:1px solid var(--line)}
+.hobby-text{padding:1rem 1.1rem 1.1rem}
+.hobby-name{font-family:var(--serif);font-weight:400;font-size:1.05rem;margin-bottom:.3rem}
+.hobby-desc{font-size:.8rem;color:var(--ink2);line-height:1.6}
 
 /* modal */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -145,7 +152,6 @@ nav ul a:hover{color:var(--pink)}
 .overlay.show .modal{transform:none}
 .modal-close{position:sticky;top:0;float:right;margin:-1rem -1rem 0 0;background:var(--surface2);border:1px solid var(--line);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:14px;color:var(--ink2);display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
 .modal-close:hover{border-color:var(--pink);color:var(--pink);box-shadow:0 0 12px var(--pink-glow)}
-.modal-ctx{font-family:var(--mono);font-size:11px;color:var(--pink);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
 .modal-title{font-family:var(--serif);font-weight:400;font-size:1.9rem;margin-bottom:1rem;line-height:1.15}
 .modal-accent{width:36px;height:2px;border-radius:2px;margin-bottom:1.25rem;background:var(--pink)}
 .modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
@@ -211,7 +217,10 @@ nav ul a:hover{color:var(--pink)}
       <p class="hero-tag">Electrical Engineering @ UBC</p>
       <h1 class="hero-name">Jasmine Saran</h1>
     </div>
-    <p class="hero-bio">Hi, I'm Jasmine, an electrical engineering student at the University of British Columbia focused on embedded systems and hardware-software integration. I build real-time systems that interact directly with the physical world, from low-level firmware to PCB-level design. Through my work with UBC Thunderbikes and my coursework, I've developed experience in autonomous systems, sensor integration, and multi-MCU architectures.</p>
+    <div class="hero-bio">
+      <p>I'm an electrical engineering student at UBC who likes working where hardware meets the physical world: power electronics, embedded systems, and the PCBs that tie them together.</p>
+      <p>I design boards for UBC Thunderbikes' electric race bike, write the firmware that runs on them, and I'm currently a hardware co-op at Kardium. Long term, I want to build power systems for robots and electric vehicles.</p>
+    </div>
     <div class="chips">
       <span class="chip">C / C++</span>
       <span class="chip">SystemVerilog</span>
@@ -230,11 +239,10 @@ nav ul a:hover{color:var(--pink)}
       <div class="dr">
         <span class="dr-label">Currently</span>
         <span class="dr-val">Hardware Engineering Co-op · Kardium</span>
-        <span class="dr-val">Hardware Design Engineer · UBC Thunderbikes</span>
       </div>
       <div class="dr">
         <span class="dr-label">Location</span>
-        <span class="dr-val">Vancouver, BC · Originally Edmonton, AB</span>
+        <span class="dr-val">Vancouver, BC</span>
       </div>
     </div>
     <div class="cta-row">
@@ -249,13 +257,19 @@ nav ul a:hover{color:var(--pink)}
       <span class="right-sub">click a project for details</span>
     </div>
     <div class="projects" id="project-grid"></div>
+
+    <section class="hobbies" id="hobbies" hidden>
+      <div class="right-header">
+        <h2 class="right-title">Outside of engineering</h2>
+      </div>
+      <div class="hobby-grid" id="hobby-grid"></div>
+    </section>
   </main>
 </div>
 
 <div class="overlay" id="overlay" aria-hidden="true">
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
     <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
-    <p class="modal-ctx" id="m-ctx"></p>
     <h2 class="modal-title" id="m-title"></h2>
     <div class="modal-accent"></div>
     <div class="modal-tags" id="m-tags"></div>
@@ -270,7 +284,6 @@ nav ul a:hover{color:var(--pink)}
 const projects = [
   {
     title: 'LED Cluster PCB',
-    context: 'UBC Thunderbikes', team: true,
     blurb: 'Custom 2-layer PCB for the UBC Thunderbikes electric race bike. 24V buck regulator, MOSFET driver stages, LTspice verified.',
     img: 'Untitled (3).png', imgAlt: 'LED cluster PCB layout',
     cardTags: ['Altium','Buck Conv.','MOSFET','LTspice'],
@@ -305,7 +318,7 @@ const projects = [
   },
   {
     title: 'Vehicle Control Unit (VCU)',
-    context: 'UBC Thunderbikes', team: true, status: 'In progress',
+     status: 'In progress',
     blurb: 'Redesign of the VCU for the Thunderbikes electric race bike. I own the MCU schematic sheet and the safety-loop relay drive, moving the shutdown circuit to mechanical relays.',
     img: null, imgAlt: 'VCU schematic',
     cardTags: ['Altium','STM32','Safety Loop','12V'],
@@ -334,7 +347,6 @@ const projects = [
   },
   {
     title: 'Autonomous Robot',
-    context: 'Coursework',
     blurb: 'Real-time PID control on STM32. Multi-MCU system with WiFi, camera, and ToF sensing. Reduced oscillations by 30%.',
     img: 'carDiagram.png', imgAlt: 'Robot system block diagram',
     cardTags: ['STM32','PID','I²C','ESP32'],
@@ -383,7 +395,6 @@ const projects = [
   },
   {
     title: 'Reflow Oven Controller',
-    context: 'Coursework',
     blurb: '6-state FSM reflow controller on DE10-Lite. Thermocouple signal conditioning, PWM heater control, ±3°C accuracy.',
     img: 'reflow.png', imgAlt: 'Thermocouple amplifier schematic',
     cardTags: ['8051 ASM','Op-Amp','PWM','Python'],
@@ -426,7 +437,6 @@ const projects = [
   },
   {
     title: 'FPGA Tron Game',
-    context: 'Coursework',
     blurb: 'Real-time Tron-style light cycle game in C on the DE10-Lite FPGA, using memory-mapped VGA rendering, hardware switch input, and ISR-based timing.',
     img: 'fpga3.png', imgAlt: 'DE10-Lite FPGA board',
     cardTags: ['C','ISR','DE10-Lite'],
@@ -446,13 +456,16 @@ const projects = [
   }
 ];
 
+// ---------- Hobbies: edit here (section stays hidden while empty) ----------
+// { name: 'Running', desc: 'One line about it.', img: 'running.jpg' }   // img is optional
+const hobbies = [];
+
 // ---------- Rendering ----------
 const grid = document.getElementById('project-grid');
 grid.innerHTML = projects.map((p, i) => `
   <button class="proj" data-i="${i}" aria-haspopup="dialog">
     <div>
-      <span class="proj-ctx${p.team ? ' team' : ''}">${p.context}</span>${p.status ? `<span class="proj-status">${p.status}</span>` : ''}
-      <h3 class="proj-name">${p.title}</h3>
+      <h3 class="proj-name">${p.title}${p.status ? ` <span class="proj-status">${p.status}</span>` : ''}</h3>
       <p class="proj-blurb">${p.blurb}</p>
     </div>
     ${p.img
@@ -464,6 +477,15 @@ grid.innerHTML = projects.map((p, i) => `
     </div>
   </button>`).join('');
 
+if (hobbies.length) {
+  document.getElementById('hobby-grid').innerHTML = hobbies.map(h => `
+    <div class="hobby">
+      ${h.img ? `<img src="${h.img}" alt="${h.name}" loading="lazy">` : ''}
+      <div class="hobby-text"><h3 class="hobby-name">${h.name}</h3><p class="hobby-desc">${h.desc}</p></div>
+    </div>`).join('');
+  document.getElementById('hobbies').hidden = false;
+}
+
 const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modal');
 const closeBtn = document.getElementById('modal-close');
@@ -471,7 +493,6 @@ let lastFocus = null;
 
 function openModal(i) {
   const p = projects[i];
-  document.getElementById('m-ctx').textContent = p.context;
   document.getElementById('m-title').textContent = p.title;
   document.getElementById('m-tags').innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
   document.getElementById('m-body').innerHTML = p.body +
